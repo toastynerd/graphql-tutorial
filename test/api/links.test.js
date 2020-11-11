@@ -25,4 +25,25 @@ describe('Links', () => {
         done();
       });
   });
+
+  it('should be able to create a new link', (done) => {
+    request.post('/')
+      .send({ query: `
+        mutation {
+          post(
+            url: "test.example.com"
+            description: "a test link for testing"
+          ) {
+            id
+          }
+        
+      }`})
+      .end((err, res) => {
+        if (err) return err;
+        expect(res.body.data).to.be.a('object');
+        expect(res.body.data.post).to.be.a('object');
+        expect(res.body.data.post).to.have.property('id');
+        done();
+      });
+  });
 });
