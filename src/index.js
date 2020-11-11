@@ -1,16 +1,3 @@
-const { GraphQLServer } = require('graphql-yoga');
-const typeDefs = require('./schema.js');
+const server = require('./server');
 
-
-const resolvers =  {
-  Query: {
-    info: () => "this is a clone of hacker news"
-  }
-};
-
-const server = new GraphQLServer({
-  typeDefs,
-  resolvers
-});
-
-server.start(() => console.log('server up a running'));
+server.start({ port: process.env.PORT || 4000 }, (info) => console.log(`server up and running on port: ${info.port}`));

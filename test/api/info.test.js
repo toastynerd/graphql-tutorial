@@ -1,7 +1,7 @@
 const chai = require('chai');
 
 const expect = chai.expect;
-const url = 'http://localhost:4000';
+const url = require('./params').url;
 const request = require('supertest')(url);
 
 describe('GraphQL', () => {
