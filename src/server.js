@@ -7,8 +7,11 @@ const prisma = new PrismaClient();
 const server = module.exports = new GraphQLServer({
   typeDefs: __dirname + '/schema.graphql',
   resolvers,
-  context: {
-    prisma
+  context: request => {
+    return {
+      ...request,
+      prisma,
+    }
   }
 });
 
